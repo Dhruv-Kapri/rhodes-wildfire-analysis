@@ -1,0 +1,37 @@
+[project]
+name = "geospatial-python"
+version = "0.1.0"
+description = "Spatial analysis of the 2023 Rhodes wildfire, following the Carpentries Incubator 'Introduction to Geospatial Raster and Vector Data with Python' lesson."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { file = "LICENSE" }
+authors = [{ name = "Dhruv Kapri" }]
+
+dependencies = [
+    # Raster / array
+    "rioxarray>=0.23.0",
+    "rasterio>=1.5.1",
+    "xarray>=2026.7.0",
+    "xarray-spatial>=0.10.17",
+    "dask>=2026.7.1",
+    # Vector / CRS
+    "geopandas>=1.1.4",
+    "shapely>=2.1.2",
+    "pyproj>=3.7.2",
+    # STAC access
+    "pystac>=1.15.2",
+    "pystac-client>=0.9.0",
+    "odc-stac>=0.5.3",
+    # Numerics / plotting
+    "numpy>=2.5.2",
+    "pandas>=3.0.5",
+    "scipy>=1.18.1",
+    "matplotlib>=3.11.1",
+    # Notebook environment
+    "jupyterlab>=4.6.3",
+    "ipykernel>=7.3.0",
+]
+
+[tool.uv]
+# This is a notebooks/analysis project, not an installable package.
+package = false
