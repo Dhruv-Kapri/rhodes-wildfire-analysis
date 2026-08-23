@@ -19,6 +19,8 @@ __pycache__/
 # Safety net for rasters accidentally written next to the notebooks
 notebooks/*.tif
 notebooks/*.tiff
+# dask.visualize() side-effect file (graph also renders inline in the notebook)
+mydask.png
 
 # --- OS / editor cruft ---
 .DS_Store
