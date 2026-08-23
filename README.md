@@ -10,28 +10,37 @@ This repository is my worked-through version of the Carpentries Incubator lesson
 
 ## What this project does
 
-The lesson builds toward a before/after assessment of burned area on Rhodes:
+Working through the lesson, the notebooks build up a before/after wildfire analysis of Rhodes:
 
-- **Search** the Earth Search STAC catalog for cloud-free Sentinel-2 scenes over Rhodes
-  (July–August 2023).
-- **Load** raster bands lazily with `rioxarray` / `xarray`, reproject, clip, and subset.
-- **Analyse** vegetation and burn severity (e.g. NDVI / normalized burn ratio) and combine
-  raster results with vector layers (administrative boundaries, land use, roads).
+- **Discover & load imagery** — search the Earth Search STAC catalog for cloud-free Sentinel-2
+  scenes and load raster bands lazily with `rioxarray` / `xarray` (notebooks 01–03).
+- **Prepare vector assets** — derive buffered "assets at risk" (key roads, built-up areas) from
+  OpenStreetMap and GADM administrative boundaries (notebook 04).
+- **Crop, align & calculate** — crop and `reproject_match` rasters, then compute NDVI and a
+  burn-detection index to map the burned area (notebooks 05–06).
+- **Quantify & scale** — summarise burn severity per asset zone with zonal statistics, speed
+  computations up with Dask, and assemble a multi-date data cube with ODC-STAC (notebooks 07–09).
 
 ## Repository structure
 
 ```
 rhodes-wildfire-analysis/
-├── notebooks/                        # Lesson notebooks, in order
-│   ├── 01_search_stac_metadata.ipynb   # STAC search: find Sentinel-2 scenes over Rhodes
-│   ├── 02_load_raster_data.ipynb       # Inspect STAC assets; load & subset a red band
-│   └── 03_open_local_raster.ipynb      # Open local raster data with rioxarray
-├── data/                             # Input data (NOT in git — see data/README.md)
-├── outputs/                          # Generated artifacts (NOT in git — see outputs/README.md)
-├── pyproject.toml                    # Project + pinned dependencies (managed by uv)
-├── uv.lock                           # Fully resolved, reproducible dependency lockfile
-├── .python-version                   # Targets Python 3.12
-├── LICENSE                           # MIT
+├── notebooks/                           # Lesson notebooks, in order
+│   ├── 01_search_stac_metadata.ipynb      # STAC search: find Sentinel-2 scenes over Rhodes
+│   ├── 02_load_raster_data.ipynb          # Inspect STAC assets; load & subset a band
+│   ├── 03_open_local_raster.ipynb         # Open local rasters with rioxarray; CRS, stats, bands
+│   ├── 04_process_vector_data.ipynb       # GADM/OSM vectors → buffered "assets at risk" layer
+│   ├── 05_crop_and_align_raster.ipynb     # Crop by bbox/polygon; align with reproject_match
+│   ├── 06_raster_calculations.ipynb       # NDVI and a burn-detection index
+│   ├── 07_zonal_statistics.ipynb          # Zonal stats of the burn mask over asset zones
+│   ├── 08_parallel_raster_dask.ipynb      # Dask-chunked parallel raster computation
+│   └── 09_data_cube_odc_stac.ipynb        # Build a time-series data cube with odc.stac
+├── data/                                # Input data (NOT in git — see data/README.md)
+├── outputs/                             # Generated artifacts (NOT in git — see outputs/README.md)
+├── pyproject.toml                       # Project + pinned dependencies (managed by uv)
+├── uv.lock                              # Fully resolved, reproducible dependency lockfile
+├── .python-version                      # Targets Python 3.12
+├── LICENSE                              # MIT
 └── README.md
 ```
 
@@ -45,6 +54,9 @@ rhodes-wildfire-analysis/
 
 - [`uv`](https://docs.astral.sh/uv/) (Python package/environment manager)
 - Python 3.12 (uv will fetch it automatically if missing)
+- **System [Graphviz](https://graphviz.org/)** — only for the Dask task-graph visualization in
+  notebook 08 (`dask.visualize`). macOS: `brew install graphviz`; Linux: `apt install graphviz`.
+  The Python binding is already pinned in `uv.lock`.
 
 ### 2. Set up the environment
 
@@ -70,7 +82,8 @@ unzip data/rhodes.zip -d data/
 uv run jupyter lab
 ```
 
-Open `notebooks/` and work through them in numeric order.
+Open `notebooks/` and work through them in numeric order. Notebooks 01, 02, and 09 fetch imagery
+over the network (STAC / AWS); the rest run against the local `data/` and `outputs/` files.
 
 ## Credits & attribution
 
