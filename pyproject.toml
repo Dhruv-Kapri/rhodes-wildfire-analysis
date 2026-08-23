@@ -1,5 +1,5 @@
 [project]
-name = "geospatial-python"
+name = "rhodes-wildfire-analysis"
 version = "0.1.0"
 description = "Spatial analysis of the 2023 Rhodes wildfire, following the Carpentries Incubator 'Introduction to Geospatial Raster and Vector Data with Python' lesson."
 readme = "README.md"

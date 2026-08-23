@@ -1,4 +1,4 @@
-# Geospatial Python — Rhodes 2023 Wildfire Analysis
+# Rhodes Wildfire Analysis (2023)
 
 A hands-on learning project applying geospatial raster and vector analysis in Python to the
 **2023 Rhodes (Greece) wildfire**, working with Sentinel-2 satellite imagery, a digital
@@ -21,16 +21,17 @@ The lesson builds toward a before/after assessment of burned area on Rhodes:
 ## Repository structure
 
 ```
-geospatial-python/
-├── notebooks/                     # Lesson notebooks, in order
-│   ├── 01_metadata_filteration.ipynb   # STAC search: find Sentinel-2 scenes over Rhodes
-│   ├── 02_data_loading_demo.ipynb      # Inspect STAC assets; load & subset a red band
-│   └── 03_b.ipynb                      # Open local raster data with rioxarray
-├── data/                          # Input data (NOT in git — see data/README.md)
-├── pyproject.toml                 # Project + pinned dependencies (managed by uv)
-├── uv.lock                        # Fully resolved, reproducible dependency lockfile
-├── .python-version                # Targets Python 3.12
-├── LICENSE                        # MIT
+rhodes-wildfire-analysis/
+├── notebooks/                        # Lesson notebooks, in order
+│   ├── 01_search_stac_metadata.ipynb   # STAC search: find Sentinel-2 scenes over Rhodes
+│   ├── 02_load_raster_data.ipynb       # Inspect STAC assets; load & subset a red band
+│   └── 03_open_local_raster.ipynb      # Open local raster data with rioxarray
+├── data/                             # Input data (NOT in git — see data/README.md)
+├── outputs/                          # Generated artifacts (NOT in git — see outputs/README.md)
+├── pyproject.toml                    # Project + pinned dependencies (managed by uv)
+├── uv.lock                           # Fully resolved, reproducible dependency lockfile
+├── .python-version                   # Targets Python 3.12
+├── LICENSE                           # MIT
 └── README.md
 ```
 
@@ -49,7 +50,7 @@ geospatial-python/
 
 ```bash
 git clone <your-repo-url>
-cd geospatial-python
+cd rhodes-wildfire-analysis
 uv sync          # creates .venv and installs everything from uv.lock
 ```
 

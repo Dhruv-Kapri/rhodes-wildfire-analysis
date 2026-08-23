@@ -40,5 +40,5 @@ data/
 Bundled for the Carpentries Incubator lesson
 [Introduction to Geospatial Raster and Vector Data with Python](https://carpentries-incubator.github.io/geospatial-python/).
 
-Some rasters (e.g. `notebooks/red.tif`) are additionally produced by running the notebooks,
-which pull Sentinel-2 assets directly from the STAC catalog — those are also git-ignored.
+Some rasters (e.g. `outputs/red.tif`) are additionally produced by running the notebooks,
+which pull Sentinel-2 assets directly from the STAC catalog — see [`../outputs/README.md`](../outputs/README.md).
